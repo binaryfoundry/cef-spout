@@ -196,20 +196,25 @@ if(OS_LINUX)
 
   # List of CEF binary files.
   set(CEF_BINARY_FILES
-    chrome-sandbox
-    libcef.so
-    natives_blob.bin
+    cef_sandbox.lib
+    chrome_elf.dll
+    d3dcompiler_47.dll
+    libcef.dll
+    libcef.lib
+    libEGL.dll
+    libGLESv2.dll
     snapshot_blob.bin
     v8_context_snapshot.bin
+    vk_swiftshader.dll
+    vk_swiftshader_icd.json
+    vulkan-1.dll
     )
 
   # List of CEF resource files.
   set(CEF_RESOURCE_FILES
-    cef.pak
-    cef_100_percent.pak
-    cef_200_percent.pak
-    cef_extensions.pak
-    devtools_resources.pak
+    chrome_100_percent.pak
+    chrome_100_percent.pak
+    resources.pak
     icudtl.dat
     locales
     )
@@ -418,25 +423,25 @@ if(OS_WINDOWS)
 
   # List of CEF binary files.
   set(CEF_BINARY_FILES
+    cef_sandbox.lib
     chrome_elf.dll
-    d3dcompiler_43.dll
     d3dcompiler_47.dll
     libcef.dll
+    libcef.lib
     libEGL.dll
     libGLESv2.dll
-    natives_blob.bin
     snapshot_blob.bin
     v8_context_snapshot.bin
-    swiftshader
+    vk_swiftshader.dll
+    vk_swiftshader_icd.json
+    vulkan-1.dll
     )
 
   # List of CEF resource files.
   set(CEF_RESOURCE_FILES
-    cef.pak
-    cef_100_percent.pak
-    cef_200_percent.pak
-    cef_extensions.pak
-    devtools_resources.pak
+    chrome_100_percent.pak
+    chrome_100_percent.pak
+    resources.pak
     icudtl.dat
     locales
     )

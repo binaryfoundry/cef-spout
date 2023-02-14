@@ -4,8 +4,8 @@
 #include <include/cef_browser.h>
 #include <include/cef_client.h>
 #include <include/cef_version.h>
-#include "../lib/Spout2/SpoutSDK/Source/Spout.h"
-#include "../lib/Spout2/SpoutSDK/Source/SpoutSenderNames.h"
+#include "../cef-spout/lib/Spout2/SpoutSDK/Source/Spout.h"
+#include "../cef-spout/lib/Spout2/SpoutSDK/Source/SpoutSenderNames.h"
 
 #include <mutex>
 #include <condition_variable>
@@ -161,7 +161,7 @@ public:
 			// notify the browser process that we want stats
 			auto message = CefProcessMessage::Create("mixer-request-stats");
 			if (message != nullptr && browser_ != nullptr) {
-				browser_->SendProcessMessage(PID_BROWSER, message);
+				browser_->GetMainFrame()->SendProcessMessage(PID_BROWSER, message);
 			}
 			return true;
 		}
@@ -259,6 +259,7 @@ public:
 	// CefRenderProcessHandler::OnProcessMessageReceived
 	//
 	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
+		CefRefPtr<CefFrame> frame,
 		CefProcessId /*source_process*/,
 		CefRefPtr<CefProcessMessage> message)
 	{
@@ -514,6 +515,7 @@ public:
 
 	bool OnProcessMessageReceived(
 		CefRefPtr<CefBrowser> /*browser*/,
+		CefRefPtr<CefFrame> frame,
 		CefProcessId /*source_process*/,
 		CefRefPtr<CefProcessMessage> message) override
 	{
@@ -701,7 +703,7 @@ public:
 		CefWindowInfo& window_info,
 		CefRefPtr<CefClient>& client,
 		CefBrowserSettings& settings,
-		bool* no_javascript_access) override
+		bool* no_javascript_access)
 	{
 		shared_ptr<Composition> composition;
 		{
@@ -735,6 +737,7 @@ public:
 			view,
 			target_url,
 			settings,
+			nullptr,
 			nullptr);
 
 		// create a new layer to handle drawing for the web popup
@@ -818,7 +821,7 @@ public:
 
 		args->SetDictionary(0, dict);
 
-		browser->SendProcessMessage(PID_RENDERER, message);
+		browser->GetMainFrame()->SendProcessMessage(PID_RENDERER, message);
 	}
 
 	void resize(int width, int height)
@@ -863,10 +866,10 @@ public:
 			CefWindowInfo windowInfo;
 			windowInfo.SetAsPopup(nullptr, "Developer Tools");
 			windowInfo.style = WS_VISIBLE | WS_OVERLAPPEDWINDOW;
-			windowInfo.x = 0;
-			windowInfo.y = 0;
-			windowInfo.width = 640;
-			windowInfo.height = 480;
+			windowInfo.bounds.x = 0;
+			windowInfo.bounds.y = 0;
+			windowInfo.bounds.width = 640;
+			windowInfo.bounds.height = 480;
 			browser->GetHost()->ShowDevTools(windowInfo, new DevToolsClient(), CefBrowserSettings(), { 0, 0 });
 		}
 	}
@@ -1253,6 +1256,7 @@ shared_ptr<Layer> create_web_layer(
 		view,
 		url,
 		settings,
+		nullptr,
 		nullptr);
 
 	return create_web_layer(device, want_input, view);

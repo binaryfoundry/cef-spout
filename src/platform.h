@@ -1,5 +1,7 @@
 #pragma once
 
+#define no_init_all deprecated
+
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif

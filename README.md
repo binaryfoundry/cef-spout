@@ -1,5 +1,7 @@
 # CEF with Spout Output
 
+Upgraded to Visual Studio 2022 and CEF 110.
+
 This application is heavily based on daktronics' CEF-Mixer application (see https://github.com/daktronics/cef-mixer). In its core, it is a Chromium-based web content rendering engine (a "headless" browser), rendering its output also as a texture to a Spout (https://github.com/leadedge/Spout2/) data channel for further use in other Spout-enabled applications. 
 
 This project was originally intended as a tool to work with HTML/JS/SVG-based visuals in other applications like MadMapper for creative coding and music/art installations (see other repos), but can be universally used to fetch live graphical output of a web browser for any purpose.
@@ -13,17 +15,16 @@ A sample application to demonstrate how to use the proposed `OnAcceleratedPaint(
 
 ## Build Instructions
 
-1. If you don't have it already - install CMake and Visual Studio 2017
-    * VS 2017 Community Edition is fine - just make sure to install C/C++ development tools
+1. If you don't have it already - install CMake and Visual Studio 2022
+    * VS 2022 Community Edition is fine - just make sure to install C/C++ development tools
 
 2. Download latest CEF to create a custom build or use an example binary distribution
-    * Sample distributions support **Chromium 72**
+    * Sample distributions support **Chromium 110**
     * [x64 sample binary distribution][x64_build] (Release build only)
     * [x86 sample binary distribution][x86_build] (Release build only)
+
     
-> Note: The above sample distributions are not supported official builds - they are intended for testing/demo purposes.
-    
-3. From a command prompt set the environment variable **CEF_ROOT** to the location of your CEF binary distribution.  Then run the gen_vs2017.bat script.
+3. From a command prompt set the environment variable **CEF_ROOT** to the location of your CEF binary distribution.  Then run the gen_vs.bat script.
 
 ```
 > set CEF_ROOT=<path\to\cef\binary-distribution>
@@ -167,8 +168,8 @@ A future update could include the following
 [demo2]: https://user-images.githubusercontent.com/2717038/37864824-a02a0648-2f41-11e8-9265-be60ad8bf8a0.png "No VSync"
 [demo3]: https://user-images.githubusercontent.com/2717038/37864648-ea76954c-2f3f-11e8-90d6-4130e56086f4.png "Grid"
 [demo4]: https://user-images.githubusercontent.com/2717038/37930171-9850afe0-3107-11e8-9a24-21e1b1996fa5.png "JSON"
-[x64_build]: https://s3.amazonaws.com/wesselsga/cef/cef_binary_3.3599.1858.g285dbb1_windows64_minimal.7z "x64 Distribution"
-[x86_build]: https://s3.amazonaws.com/wesselsga/cef/cef_binary_3.3599.1858.g285dbb1_windows32_minimal.7z "x86 Distribution"
+[x64_build]: https://cef-builds.spotifycdn.com/cef_binary_110.0.25%2Bg75b1c96%2Bchromium-110.0.5481.78_windows64_minimal.tar.bz2 "x64 Distribution"
+[x86_build]: https://cef-builds.spotifycdn.com/cef_binary_110.0.25%2Bg75b1c96%2Bchromium-110.0.5481.78_windows32_minimal.tar.bz2 "x86 Distribution"
 [pr158]: https://bitbucket.org/chromiumembedded/cef/pull-requests/158/support-external-textures-in-osr-mode/diff "Pull Request"
 [changes]: https://github.com/daktronics/cef-mixer/blob/master/CHANGES.md "Walkthrough"
 

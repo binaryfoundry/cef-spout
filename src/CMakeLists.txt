@@ -32,8 +32,10 @@ source_group("spout" FILES ${spout_src_files} ${spout_inc_files})
 
 add_dependencies(cef_spout libcef_dll_wrapper)
 
+find_library(PROTOBUF_LIBRARY protobuf HINTS ${PROJECT_SOURCE_DIR}/lib/Spout2/SpoutSDK/Source/VS2012/Binaries/x64)
+
 # Indicate which libraries to include during the link process.
-target_link_libraries (cef_spout d3d11.lib Shlwapi.lib libcef_lib libcef_dll_wrapper opengl32)
+target_link_libraries (cef_spout ${SPOUT_LIBRARY} d3d11.lib Shlwapi.lib libcef_lib libcef_dll_wrapper opengl32)
 
 COPY_FILES(cef_spout "${CEF_BINARY_FILES}" "${CEF_BINARY_DIR}" "${TARGET_OUTPUT_DIRECTORY}")
 COPY_FILES(cef_spout "${CEF_RESOURCE_FILES}" "${CEF_RESOURCE_DIR}" "${TARGET_OUTPUT_DIRECTORY}")
